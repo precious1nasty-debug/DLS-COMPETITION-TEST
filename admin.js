@@ -1249,7 +1249,7 @@ if (competitionFormat) {
 
   competitionFormat.addEventListener(
     "change",
-    function() {
+    async function() {
 
       if (
         season.started ||
@@ -1260,9 +1260,9 @@ if (competitionFormat) {
           season.format;
 
         updateFormatSettings();
+        updateSeasonControlState();
 
         if (seasonControlMessage) {
-
           seasonControlMessage.textContent =
             "🔒 Competition format is locked because the season has started.";
         }
@@ -1273,6 +1273,13 @@ if (competitionFormat) {
 
       const newFormat =
         competitionFormat.value;
+
+      const previousFormat = season.format;
+      const previousPhase = season.phase;
+      const previousFixtures = fixtures;
+      const previousKnockout = knockout;
+      const previousChampions = champions;
+      const previousQualificationCount = season.qualificationCount;
 
 
       /*
@@ -1302,12 +1309,9 @@ if (competitionFormat) {
 
 
         if (!confirmed) {
-
-          competitionFormat.value =
-            season.format;
-
+          competitionFormat.value = season.format;
           updateFormatSettings();
-
+          updateSeasonControlState();
           return;
         }
 
@@ -1318,50 +1322,59 @@ if (competitionFormat) {
          */
 
         fixtures = [];
-
-        knockout =
-          createDefaultKnockout();
-
-        champions =
-          createDefaultChampions();
-
-        season.qualificationCount =
-          0;
-
-        season.phase =
-          "registration";
+        knockout = createDefaultKnockout();
+        champions = createDefaultChampions();
+        season.qualificationCount = 0;
+        season.phase = "registration";
       }
 
 
       /*
-       * Apply the new format.
+       * Apply and immediately persist the
+       * selected format before enabling its
+       * dependent settings.
        */
 
-      season.format =
-        newFormat;
-
-
-      season.phase =
-        "registration";
-
+      season.format = newFormat;
+      season.phase = "registration";
 
       updateFormatSettings();
-
       updateMatchesPerTeamSuggestion();
-
       updateChampionsQualificationInfo();
-
+      updateSeasonControlState();
 
       if (seasonControlMessage) {
-
         seasonControlMessage.textContent =
-          "🟢 " +
-          (
-            season.format === "champions"
-              ? "Champions League"
-              : "League"
-          ) +
-          " selected. Configure the new season settings before starting.";
+          "⏳ Saving " +
+          (newFormat === "champions" ? "Champions League" : "League") +
+          " format...";
+      }
+
+      const saved = await saveCompetition();
+
+      if (!saved) {
+        season.format = previousFormat;
+        season.phase = previousPhase;
+        fixtures = previousFixtures;
+        knockout = previousKnockout;
+        champions = previousChampions;
+        season.qualificationCount = previousQualificationCount;
+        competitionFormat.value = previousFormat;
+        updateFormatSettings();
+        updateSeasonControlState();
+
+        if (seasonControlMessage) {
+          seasonControlMessage.textContent =
+            "❌ Format was not saved. Your previous competition settings have been restored.";
+        }
+        return;
+      }
+
+      if (seasonControlMessage) {
+        seasonControlMessage.textContent =
+          "✅ " +
+          (newFormat === "champions" ? "Champions League" : "League") +
+          " selected and saved. Configure the season settings before starting.";
       }
     }
   );
