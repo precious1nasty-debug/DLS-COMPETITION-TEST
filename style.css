@@ -1,0 +1,4092 @@
+/* =========================================================
+   DLS COMPETITION
+   PUBLIC STYLE
+   PART 25 — LEAGUE + CHAMPIONS UI
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f9;
+  color: #172033;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+  background: #101828;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header-inner h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+nav a {
+  padding: 8px 10px;
+  border-radius: 7px;
+  color: white;
+}
+
+nav a:hover {
+  background: #24324a;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    #172554,
+    #1d4ed8
+  );
+  color: white;
+  text-align: center;
+  padding: 70px 20px;
+}
+
+.hero h2 {
+  margin: 0 0 10px;
+  font-size: 42px;
+}
+
+.hero p {
+  margin: 0;
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 45px 20px;
+}
+
+.section > h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.section-card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 25px;
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   TEAMS
+========================================================= */
+
+.teams-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.team-card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+
+/* =========================================================
+   FIXTURES
+========================================================= */
+
+.fixture-round {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.fixture-round h3 {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.fixture-list {
+  display: grid;
+  gap: 6px;
+}
+
+.fixture-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border: 1px solid #e4e7ec;
+  border-radius: 8px;
+  background: #fafafa;
+  min-width: 0;
+}
+
+.fixture-card span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.fixture-card span:first-child {
+  text-align: left;
+}
+
+.fixture-card span:last-child {
+  text-align: right;
+}
+
+.fixture-card strong {
+  min-width: 52px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 650px) {
+  .fixture-round {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .fixture-round h3 {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+
+  .fixture-card {
+    gap: 5px;
+    padding: 8px 6px;
+    font-size: 0.9rem;
+  }
+
+  .fixture-card strong {
+    min-width: 48px;
+  }
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper {
+  overflow-x: auto;
+  background: white;
+  border-radius: 14px;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px 10px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #101828;
+  color: white;
+}
+
+td:nth-child(2),
+th:nth-child(2) {
+  text-align: left;
+}
+
+.qualification-cutoff td {
+  background: #fff4cc;
+  color: #8a5a00;
+  font-weight: bold;
+  text-align: center;
+}
+
+.qualification-legend {
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+
+/* =========================================================
+   CHAMPIONS
+========================================================= */
+
+.champions-section {
+  background: #eef2ff;
+  max-width: none;
+}
+
+.champions-section > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.champions-status {
+  padding: 10px 0;
+}
+
+.qualified-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.qualified-team {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.qualified-team span {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #172554;
+  color: white;
+  font-weight: bold;
+}
+
+
+/* =========================================================
+   KNOCKOUT BRACKET
+========================================================= */
+
+.bracket-container {
+  overflow-x: auto;
+  padding-bottom: 15px;
+}
+
+.bracket {
+  display: flex;
+  gap: 25px;
+  min-width: max-content;
+  align-items: flex-start;
+}
+
+.bracket-round {
+  width: 230px;
+}
+
+.bracket-round h3 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.bracket-ties {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.knockout-tie {
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.knockout-team {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 5px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.knockout-team:last-of-type {
+  border-bottom: none;
+}
+
+.knockout-winner {
+  margin-top: 8px;
+  padding: 7px;
+  border-radius: 7px;
+  background: #ecfdf3;
+  color: #087443;
+  font-weight: bold;
+  text-align: center;
+}
+
+.third-place-card {
+  margin-top: 30px;
+  max-width: 350px;
+}
+
+.third-place-card h3 {
+  margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   PODIUM
+========================================================= */
+
+.podium {
+  display: grid;
+  grid-template-columns:
+    repeat(3, 1fr);
+  gap: 20px;
+  align-items: end;
+}
+
+.podium-place {
+  text-align: center;
+  padding: 25px 15px;
+  border-radius: 14px;
+  background: white;
+  border: 1px solid #e1e5eb;
+}
+
+.podium-medal {
+  font-size: 42px;
+  margin-bottom: 8px;
+}
+
+.podium-place h3 {
+  margin: 5px 0;
+}
+
+.gold {
+  border-top: 6px solid #d4a900;
+}
+
+.silver {
+  border-top: 6px solid #9aa4b2;
+}
+
+.bronze {
+  border-top: 6px solid #a65f32;
+}
+
+
+/* =========================================================
+   REGISTRATION
+========================================================= */
+
+form {
+  display: grid;
+  gap: 10px;
+  max-width: 550px;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #2563eb;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  background: #1d4ed8;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+.registration-message {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+  background: #101828;
+  color: white;
+  text-align: center;
+  padding: 25px 20px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .header-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-inner h1 {
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  .hero {
+    padding: 50px 15px;
+  }
+
+  .hero h2 {
+    font-size: 30px;
+  }
+
+  .section {
+    padding: 35px 12px;
+  }
+
+  .section-card {
+    padding: 18px;
+  }
+
+  .fixture-card {
+    grid-template-columns:
+      1fr auto 1fr;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .podium {
+    grid-template-columns: 1fr;
+  }
+
+  .bracket-round {
+    width: 210px;
+  }
+}
+
+/* =========================================================
+   PART 26 — CHAMPIONS LEAGUE TREE
+========================================================= */
+
+.champions-section {
+  overflow: hidden;
+}
+
+.bracket-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 15px 5px 25px;
+}
+
+.bracket {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  min-width: max-content;
+}
+
+.bracket-round {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bracket-round h3 {
+  background: #101828;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.bracket-ties {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 25px;
+}
+
+.knockout-tie {
+  position: relative;
+  width: 100%;
+  background: white;
+  border: 1px solid #cfd7e3;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.knockout-team {
+  min-height: 42px;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #fff;
+}
+
+.knockout-team:first-child {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.knockout-team strong {
+  min-width: 25px;
+  text-align: right;
+}
+
+.knockout-winner {
+  margin: 0;
+  border-radius: 0;
+  background: #ecfdf3;
+  border-top: 1px solid #ccebd9;
+}
+
+.third-place-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 35px auto 0;
+}
+
+
+/* =========================================================
+   MOBILE BRACKET
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .bracket {
+    gap: 20px;
+  }
+
+  .bracket-round {
+    width: 210px;
+  }
+
+  .bracket-round h3 {
+    font-size: 15px;
+  }
+
+  .knockout-team {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   CHAMPIONS LEAGUE — 2D SKELETON BRACKET
+========================================================= */
+
+.league-table-dropdown {
+  background: white;
+  border-radius: 14px;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.league-table-dropdown summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 22px;
+  font-size: 22px;
+  font-weight: 800;
+  background: #101828;
+  color: white;
+}
+
+.league-table-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.league-table-dropdown summary::after {
+  content: "▾";
+  float: right;
+}
+
+.league-table-dropdown[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.league-table-dropdown .qualification-legend,
+.league-table-dropdown .table-wrapper {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.league-table-dropdown .qualification-legend {
+  padding-top: 15px;
+}
+
+.league-table-dropdown .table-wrapper {
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   BRACKET OUTER SHELL
+========================= */
+
+.champions-skeleton-shell {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(57, 35, 120, 0.42),
+      transparent 42%
+    ),
+    linear-gradient(
+      135deg,
+      #080b28,
+      #11164a 52%,
+      #080b28
+    );
+  border: 1px solid rgba(100, 126, 255, 0.45);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.28);
+}
+
+.champions-skeleton-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(124, 145, 255, 0.35);
+}
+
+.champions-skeleton-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: white;
+}
+
+.champions-skeleton-title > span {
+  font-size: 38px;
+}
+
+.champions-skeleton-title strong {
+  display: block;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+}
+
+.champions-skeleton-title small {
+  display: block;
+  margin-top: 3px;
+  color: #b9c6ff;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+}
+
+.bracket-scroll-note {
+  color: #aebcff;
+  font-size: 12px;
+  text-align: right;
+}
+
+
+/* =========================
+   HORIZONTAL BRACKET
+========================= */
+
+.champions-skeleton-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  padding: 28px 22px 34px;
+}
+
+.champions-skeleton-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(145px, 1fr)
+    minmax(145px, 1fr)
+    minmax(145px, 1fr)
+    minmax(205px, 1.35fr)
+    minmax(145px, 1fr)
+    minmax(145px, 1fr)
+    minmax(145px, 1fr);
+  align-items: stretch;
+  gap: 0;
+  min-width: 1050px;
+  min-height: 570px;
+}
+
+
+/* =========================
+   ROUND COLUMNS
+========================= */
+
+.skeleton-round,
+.skeleton-final-column {
+  position: relative;
+  min-width: 0;
+}
+
+.skeleton-round-title {
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: #f1f4ff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.skeleton-round-title::after {
+  content: "";
+  position: absolute;
+  top: 31px;
+  left: 50%;
+  width: 72px;
+  height: 2px;
+  transform: translateX(-50%);
+  background: #6678ff;
+  border-radius: 2px;
+}
+
+.skeleton-round-body {
+  position: relative;
+  height: calc(100% - 34px);
+  padding: 0 8px;
+}
+
+.skeleton-round-body.single-tie {
+  padding: 0 8px;
+}
+
+.visual-bracket-tie {
+  position: relative;
+  z-index: 2;
+  background: #17204b;
+  color: #f5f7ff;
+  border: 1px solid #6076bd;
+  border-radius: 7px;
+  overflow: visible;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.visual-bracket-tie::before,
+.visual-bracket-tie::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  width: 18px;
+  background: #eef2ff;
+  transform: translateY(-50%);
+}
+
+.visual-bracket-label {
+  padding: 4px 7px;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #9fb0ff;
+  border-bottom: 1px solid rgba(130, 151, 255, 0.3);
+  text-transform: uppercase;
+}
+
+.visual-bracket-team {
+  min-height: 28px;
+  padding: 5px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  border-bottom: 1px solid rgba(148, 164, 214, 0.2);
+  font-size: 10px;
+  line-height: 1.15;
+}
+
+.visual-bracket-team:last-child {
+  border-bottom: 0;
+}
+
+.visual-bracket-team.is-winner {
+  background: rgba(35, 207, 125, 0.18);
+  color: #baffd9;
+  font-weight: 900;
+}
+
+.visual-bracket-team strong {
+  min-width: 15px;
+  text-align: right;
+  color: white;
+}
+
+
+/* =========================
+   APPROVED CHAMPIONS LEAGUE 2D DIAGRAM
+========================= */
+
+.champions-skeleton-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  padding: 28px 18px 34px;
+}
+
+.champions-skeleton-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    210px 190px 180px 230px 180px 190px 210px;
+  column-gap: 26px;
+  width: 1556px;
+  min-width: 1556px;
+  height: 620px;
+  min-height: 620px;
+}
+
+.champions-skeleton-grid.qf-only {
+  grid-template-columns:
+    210px 190px 230px 190px 210px;
+  width: 1094px;
+  min-width: 1094px;
+}
+
+.champions-bracket-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.champions-bracket-lines path {
+  fill: none;
+  stroke: #f4f7ff;
+  stroke-width: 3;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.champions-skeleton-grid > .skeleton-round,
+.champions-skeleton-grid > .skeleton-final-column {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.skeleton-round-title {
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: #f5f7ff;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .8px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.skeleton-round-title::after {
+  content: "";
+  position: absolute;
+  top: 31px;
+  left: 50%;
+  width: 92px;
+  height: 3px;
+  transform: translateX(-50%);
+  background: #6688ff;
+  border-radius: 3px;
+}
+
+.skeleton-round-body {
+  position: relative;
+  height: calc(100% - 34px);
+  padding: 0;
+}
+
+.skeleton-round-body.single-tie {
+  padding: 0;
+}
+
+.round-r16 .skeleton-round-body > .visual-bracket-tie,
+.round-qf .skeleton-round-body > .visual-bracket-tie,
+.sf-column .skeleton-round-body > .visual-bracket-tie {
+  position: absolute;
+  left: 50%;
+  width: calc(100% - 20px);
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
+.round-r16 .skeleton-round-body > .visual-bracket-tie:nth-child(1) { top: 12.1%; }
+.round-r16 .skeleton-round-body > .visual-bracket-tie:nth-child(2) { top: 36.0%; }
+.round-r16 .skeleton-round-body > .visual-bracket-tie:nth-child(3) { top: 59.9%; }
+.round-r16 .skeleton-round-body > .visual-bracket-tie:nth-child(4) { top: 83.8%; }
+
+.round-qf .skeleton-round-body > .visual-bracket-tie:nth-child(1) { top: 24.1%; }
+.round-qf .skeleton-round-body > .visual-bracket-tie:nth-child(2) { top: 71.8%; }
+
+.sf-column .skeleton-round-body > .visual-bracket-tie {
+  top: 50%;
+}
+
+.visual-bracket-tie {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+
+.visual-bracket-tie::before,
+.visual-bracket-tie::after {
+  content: none !important;
+}
+
+.visual-bracket-label {
+  margin: 0 0 4px;
+  padding: 0 7px;
+  color: #aebdff;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 0;
+}
+
+.visual-bracket-team {
+  min-height: 40px;
+  margin: 3px 0;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 2px solid #168fff;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #10295d, #071a45);
+  color: #f8fbff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.1;
+  box-sizing: border-box;
+}
+
+.visual-bracket-team:last-child {
+  border-bottom: 2px solid #168fff;
+}
+
+.visual-bracket-team.is-winner {
+  background: rgba(35, 207, 125, 0.18);
+  border-color: #168fff;
+  color: #baffd9;
+  font-weight: 900;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.visual-bracket-team.is-winner strong {
+  color: white;
+}
+
+.visual-bracket-team strong {
+  min-width: 28px;
+  padding-left: 7px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  border-left: 1px solid rgba(255,255,255,.22);
+}
+
+
+/* FINAL COLUMN */
+
+.skeleton-final-column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 10px;
+}
+
+.skeleton-final-column .skeleton-round-title {
+  flex: 0 0 34px;
+}
+
+.skeleton-trophy {
+  text-align: center;
+  padding: 42px 0 14px;
+}
+
+.trophy-icon {
+  font-size: 78px;
+  line-height: 1;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.4));
+}
+
+.trophy-label {
+  margin-top: 8px;
+  color: #ffd33d;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.skeleton-final-tie {
+  position: absolute;
+  top: 315px;
+  left: 50%;
+  width: 210px;
+  max-width: 210px;
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
+.skeleton-final-tie::before,
+.skeleton-final-tie::after {
+  content: none !important;
+}
+
+.skeleton-final-tie .visual-bracket-team {
+  min-height: 48px;
+  font-size: 15px;
+}
+
+.skeleton-champion {
+  position: absolute;
+  top: 382px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 155px;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  border: 2px solid #00d9ff;
+  border-radius: 9px;
+  background: rgba(5,12,46,.72);
+  color: white;
+}
+
+.skeleton-champion span {
+  display: block;
+  color: #ffd33d;
+  font-size: 22px;
+}
+
+.skeleton-champion strong {
+  display: block;
+  margin: 2px 0 5px;
+  color: #ffd33d;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.skeleton-champion div {
+  font-size: 11px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.skeleton-third-place {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 300px;
+  transform: translateX(-50%);
+  padding-top: 18px;
+  text-align: center;
+}
+
+.third-place-title {
+  margin-bottom: 7px;
+  color: white;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.third-place-team {
+  max-width: 300px;
+  margin: auto;
+  padding: 10px;
+  border: 2px solid #3e83ff;
+  border-radius: 9px;
+  color: white;
+  background: #102454;
+  font-size: 13px;
+}
+
+
+/* =========================
+   8-TEAM QF-ONLY DIAGRAM
+========================= */
+
+.qf-only .round-qf .skeleton-round-body > .visual-bracket-tie:nth-child(1) {
+  top: 27%;
+}
+
+.qf-only .round-qf .skeleton-round-body > .visual-bracket-tie:nth-child(2) {
+  top: 73%;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .champions-skeleton-heading {
+    display: block;
+    padding: 16px;
+  }
+
+  .champions-skeleton-title > span {
+    font-size: 30px;
+  }
+
+  .champions-skeleton-title strong {
+    font-size: 19px;
+  }
+
+  .champions-skeleton-title small {
+    font-size: 11px;
+  }
+
+  .bracket-scroll-note {
+    margin-top: 10px;
+    text-align: left;
+    font-size: 11px;
+  }
+
+  .champions-skeleton-scroll {
+    padding: 22px 10px 28px;
+    touch-action: pan-x;
+  }
+
+  .champions-skeleton-grid {
+    width: 1556px;
+    min-width: 1556px;
+    height: 620px;
+    min-height: 620px;
+  }
+
+  .champions-skeleton-grid.qf-only {
+    width: 1094px;
+    min-width: 1094px;
+  }
+
+  .visual-bracket-team {
+    min-height: 38px;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .visual-bracket-team strong {
+    font-size: 13px;
+  }
+
+  .visual-bracket-label {
+    font-size: 8px;
+  }
+
+  .skeleton-round-title {
+    font-size: 10px;
+  }
+
+  .trophy-icon {
+    font-size: 62px;
+  }
+}
+
+@media (max-width: 390px) {
+  .champions-skeleton-grid {
+    width: 1556px;
+    min-width: 1556px;
+  }
+
+  .champions-skeleton-grid.qf-only {
+    width: 1094px;
+    min-width: 1094px;
+  }
+}
+
+/* =========================
+   ANDROID + IPHONE
+========================= */
+
+@media (max-width: 700px) {
+
+  .champions-skeleton-heading {
+    display: block;
+    padding: 16px;
+  }
+
+  .champions-skeleton-title > span {
+    font-size: 30px;
+  }
+
+  .champions-skeleton-title strong {
+    font-size: 19px;
+  }
+
+  .champions-skeleton-title small {
+    font-size: 11px;
+  }
+
+  .bracket-scroll-note {
+    margin-top: 10px;
+    text-align: left;
+    font-size: 11px;
+  }
+
+  .champions-skeleton-scroll {
+    padding: 22px 12px 28px;
+    touch-action: pan-x;
+  }
+
+  .champions-skeleton-grid {
+    min-width: 1075px;
+    min-height: 570px;
+  }
+
+  .champions-skeleton-grid.qf-only {
+    min-width: 910px;
+  }
+
+  .skeleton-round-body {
+    gap: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .visual-bracket-team {
+    min-height: 27px;
+    padding: 5px 6px;
+    font-size: 9px;
+  }
+
+  .visual-bracket-label {
+    font-size: 7px;
+  }
+
+  .skeleton-round-title {
+    font-size: 9px;
+  }
+
+  .trophy-icon {
+    font-size: 52px;
+  }
+
+  .skeleton-champion {
+    width: 130px;
+  }
+}
+
+@media (max-width: 390px) {
+
+  .champions-skeleton-grid {
+    min-width: 1075px;
+  }
+
+  .champions-skeleton-grid.qf-only {
+    min-width: 910px;
+  }
+}
+
+
+/* =========================================================
+   FINAL MOBILE REFINEMENT
+   Keeps desktop design unchanged.
+========================================================= */
+
+@media (max-width: 700px) {
+
+  body {
+    font-size: 14px;
+    overflow-x: hidden;
+  }
+
+  .header-inner {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .header-inner h1 {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  nav {
+    gap: 4px;
+  }
+
+  nav a {
+    padding: 6px 7px;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .hero {
+    padding: 34px 14px;
+  }
+
+  .hero h2 {
+    font-size: 25px;
+    line-height: 1.15;
+    margin-bottom: 7px;
+  }
+
+  .hero p {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .section {
+    padding: 25px 10px;
+  }
+
+  .section > h2 {
+    font-size: 21px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .section-card {
+    padding: 14px;
+    border-radius: 11px;
+    margin-bottom: 16px;
+  }
+
+  .team-card {
+    padding: 13px;
+    font-size: 13px;
+  }
+
+  .teams-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 9px;
+  }
+
+  .fixture-round {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .fixture-round h3 {
+    font-size: 16px;
+  }
+
+  .fixture-list {
+    gap: 7px;
+  }
+
+  .fixture-card {
+    gap: 5px;
+    padding: 9px 7px;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .fixture-card strong {
+    min-width: 38px;
+  }
+
+  .qualified-grid {
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 8px;
+  }
+
+  .qualified-team {
+    gap: 8px;
+    padding: 9px;
+    font-size: 12px;
+  }
+
+  .qualified-team span {
+    width: 25px;
+    height: 25px;
+    flex: 0 0 25px;
+    font-size: 11px;
+  }
+
+  .league-table-dropdown {
+    border-radius: 10px;
+  }
+
+  .league-table-dropdown summary {
+    padding: 13px 14px;
+    font-size: 17px;
+  }
+
+  .league-table-dropdown .qualification-legend,
+  .league-table-dropdown .table-wrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .qualification-legend {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  th,
+  td {
+    padding: 8px 7px;
+    font-size: 11px;
+  }
+
+  .table-wrapper {
+    border-radius: 10px;
+  }
+
+  .podium-place {
+    padding: 17px 12px;
+  }
+
+  .podium-medal {
+    font-size: 32px;
+  }
+
+  .podium-place h3 {
+    font-size: 16px;
+  }
+
+  form {
+    gap: 8px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  footer {
+    padding: 18px 12px;
+    font-size: 12px;
+  }
+
+  /* Keep the approved bracket geometry intact, but make its
+     contents lighter and easier to read on a phone. */
+  .champions-skeleton-heading {
+    padding: 12px;
+  }
+
+  .champions-skeleton-title {
+    gap: 9px;
+  }
+
+  .champions-skeleton-title > span {
+    font-size: 24px;
+  }
+
+  .champions-skeleton-title strong {
+    font-size: 15px;
+  }
+
+  .champions-skeleton-title small {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .bracket-scroll-note {
+    font-size: 9px;
+  }
+
+  .champions-skeleton-scroll {
+    padding: 14px 8px 20px;
+  }
+
+  .visual-bracket-team {
+    min-height: 32px;
+    padding: 5px 6px;
+    font-size: 9px;
+    line-height: 1.05;
+  }
+
+  .visual-bracket-team strong {
+    min-width: 22px;
+    padding-left: 5px;
+    font-size: 10px;
+  }
+
+  .visual-bracket-label {
+    font-size: 6px;
+    padding: 0 5px;
+  }
+
+  .skeleton-round-title {
+    font-size: 8px;
+    letter-spacing: .5px;
+  }
+
+  .trophy-icon {
+    font-size: 46px;
+  }
+
+  .trophy-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .skeleton-final-tie .visual-bracket-team {
+    min-height: 38px;
+    font-size: 11px;
+  }
+
+  .skeleton-champion {
+    width: 120px;
+    padding: 8px;
+  }
+
+  .skeleton-champion span {
+    font-size: 18px;
+  }
+
+  .skeleton-champion strong {
+    font-size: 9px;
+  }
+
+  .skeleton-champion div {
+    font-size: 9px;
+  }
+
+  .third-place-title {
+    font-size: 10px;
+  }
+
+  .third-place-team {
+    font-size: 10px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+
+  .header-inner h1 {
+    font-size: 17px;
+  }
+
+  nav a {
+    padding: 5px 6px;
+    font-size: 11px;
+  }
+
+  .hero h2 {
+    font-size: 23px;
+  }
+
+  .section > h2 {
+    font-size: 19px;
+  }
+
+  .fixture-card {
+    font-size: 11px;
+  }
+
+  .qualified-team {
+    font-size: 11px;
+  }
+
+  .visual-bracket-team {
+    font-size: 8px;
+  }
+
+  .visual-bracket-team strong {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE KNOCKOUT — FIT INSIDE PHONE SCREEN
+   No horizontal bracket scrolling on phones.
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .champions-skeleton-scroll {
+    overflow-x: hidden;
+    padding: 10px 6px 16px;
+  }
+
+  .champions-skeleton-grid,
+  .champions-skeleton-grid.qf-only {
+    width: 100%;
+    min-width: 0;
+    height: 480px;
+    min-height: 480px;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, .9fr)
+      minmax(0, .85fr)
+      minmax(0, 1.05fr)
+      minmax(0, .85fr)
+      minmax(0, .9fr)
+      minmax(0, 1fr);
+    column-gap: 0;
+  }
+
+  .champions-skeleton-grid.qf-only {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, .9fr)
+      minmax(0, 1.05fr)
+      minmax(0, .9fr)
+      minmax(0, 1fr);
+  }
+
+  .round-r16 .skeleton-round-body > .visual-bracket-tie,
+  .round-qf .skeleton-round-body > .visual-bracket-tie,
+  .sf-column .skeleton-round-body > .visual-bracket-tie {
+    width: calc(100% - 4px);
+  }
+
+  .visual-bracket-team {
+    min-height: 27px;
+    margin: 2px 0;
+    padding: 4px 4px;
+    font-size: 7px;
+    line-height: 1.05;
+    gap: 3px;
+    border-width: 1px;
+    border-radius: 5px;
+  }
+
+  .visual-bracket-team strong {
+    min-width: 14px;
+    padding-left: 3px;
+    font-size: 7px;
+  }
+
+  .visual-bracket-label {
+    margin-bottom: 2px;
+    padding: 0 2px;
+    font-size: 5px;
+    letter-spacing: .3px;
+  }
+
+  .skeleton-round-title {
+    height: 27px;
+    font-size: 6px;
+    letter-spacing: .3px;
+  }
+
+  .skeleton-round-title::after {
+    top: 25px;
+    width: 45px;
+    height: 2px;
+  }
+
+  .skeleton-final-column {
+    padding: 0 2px;
+  }
+
+  .skeleton-trophy {
+    padding: 25px 0 8px;
+  }
+
+  .trophy-icon {
+    font-size: 34px;
+  }
+
+  .trophy-label {
+    margin-top: 4px;
+    font-size: 7px;
+    letter-spacing: .5px;
+  }
+
+  .skeleton-final-tie {
+    width: calc(100% - 4px);
+    max-width: none;
+    top: 245px;
+  }
+
+  .skeleton-final-tie .visual-bracket-team {
+    min-height: 30px;
+    font-size: 7px;
+  }
+
+  .skeleton-champion {
+    top: 295px;
+    width: 82px;
+    padding: 5px;
+    border-width: 1px;
+    border-radius: 5px;
+  }
+
+  .skeleton-champion span {
+    font-size: 14px;
+  }
+
+  .skeleton-champion strong {
+    margin: 1px 0 3px;
+    font-size: 6px;
+    letter-spacing: .5px;
+  }
+
+  .skeleton-champion div {
+    font-size: 6px;
+  }
+
+  .skeleton-third-place {
+    bottom: 2px;
+    width: 105px;
+    padding-top: 6px;
+  }
+
+  .third-place-title {
+    margin-bottom: 3px;
+    font-size: 6px;
+    letter-spacing: .4px;
+  }
+
+  .third-place-team {
+    max-width: 105px;
+    padding: 5px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 6px;
+  }
+
+  .champions-bracket-lines path {
+    stroke-width: 1.5;
+  }
+
+  .qf-only .round-qf .skeleton-round-body > .visual-bracket-tie:nth-child(1) {
+    top: 27%;
+  }
+
+  .qf-only .round-qf .skeleton-round-body > .visual-bracket-tie:nth-child(2) {
+    top: 73%;
+  }
+}
+
+@media (max-width: 390px) {
+
+  .champions-skeleton-grid,
+  .champions-skeleton-grid.qf-only {
+    height: 440px;
+    min-height: 440px;
+  }
+
+  .visual-bracket-team {
+    font-size: 6.5px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  .visual-bracket-team strong {
+    font-size: 6.5px;
+  }
+
+  .skeleton-round-title {
+    font-size: 5.5px;
+  }
+
+  .skeleton-final-tie {
+    top: 225px;
+  }
+
+  .skeleton-champion {
+    top: 270px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE KNOCKOUT — SHORT RECTANGULAR TEAM BOXES
+========================================================= */
+
+@media (max-width: 700px) {
+  .visual-bracket-team {
+    min-height: 20px;
+    height: 20px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    line-height: 1;
+  }
+
+  .visual-bracket-team strong {
+    min-width: 12px;
+    padding-left: 2px;
+    font-size: 6.5px;
+  }
+}
+
+@media (max-width: 390px) {
+  .visual-bracket-team {
+    min-height: 19px;
+    height: 19px;
+    padding: 2px 3px;
+    border-radius: 2px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE KNOCKOUT — COMPACT RECTANGLE
+========================================================= */
+@media (max-width:700px) {
+  .visual-bracket-team {
+    box-sizing:border-box;
+    width:100%;
+    height:16px !important;
+    min-height:16px !important;
+    max-height:16px !important;
+    margin:1px 0 !important;
+    padding:1px 3px !important;
+    border-radius:2px !important;
+    font-size:6px !important;
+    line-height:14px !important;
+    overflow:hidden;
+  }
+
+  .visual-bracket-team strong {
+    font-size:6px !important;
+    line-height:14px !important;
+  }
+}
+@media (max-width:390px) {
+  .visual-bracket-team {
+    height:15px !important;
+    min-height:15px !important;
+    max-height:15px !important;
+    font-size:5.5px !important;
+    line-height:13px !important;
+  }
+  .visual-bracket-team strong {
+    font-size:5.5px !important;
+    line-height:13px !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL MOBILE KNOCKOUT COMPACT HEIGHT
+========================================================= */
+@media (max-width:700px) {
+  .champions-skeleton-scroll {
+    padding: 6px 4px 10px !important;
+    overflow-x: hidden !important;
+  }
+
+  .champions-skeleton-grid,
+  .champions-skeleton-grid.qf-only {
+    height: 300px !important;
+    min-height: 300px !important;
+  }
+
+  .skeleton-round-title {
+    height: 20px !important;
+    font-size: 5px !important;
+  }
+
+  .skeleton-round-title::after {
+    top: 19px !important;
+    height: 1px !important;
+    width: 30px !important;
+  }
+
+  .skeleton-round-body {
+    height: calc(100% - 20px) !important;
+  }
+
+  .visual-bracket-label {
+    margin-bottom: 1px !important;
+    font-size: 4px !important;
+  }
+
+  .visual-bracket-team {
+    height: 13px !important;
+    min-height: 13px !important;
+    max-height: 13px !important;
+    margin: 0 !important;
+    padding: 0 2px !important;
+    font-size: 5px !important;
+    line-height: 11px !important;
+  }
+
+  .visual-bracket-team strong {
+    min-width: 9px !important;
+    padding-left: 1px !important;
+    font-size: 5px !important;
+    line-height: 11px !important;
+  }
+
+  .skeleton-final-column {
+    padding: 0 1px !important;
+  }
+
+  .skeleton-trophy {
+    padding: 10px 0 3px !important;
+  }
+
+  .trophy-icon {
+    font-size: 22px !important;
+  }
+
+  .trophy-label {
+    margin-top: 2px !important;
+    font-size: 5px !important;
+  }
+
+  .skeleton-final-tie {
+    top: 150px !important;
+    width: calc(100% - 2px) !important;
+  }
+
+  .skeleton-final-tie .visual-bracket-team {
+    height: 14px !important;
+    min-height: 14px !important;
+    max-height: 14px !important;
+    font-size: 5px !important;
+  }
+
+  .skeleton-champion {
+    top: 190px !important;
+    width: 65px !important;
+    padding: 3px !important;
+    border-width: 1px !important;
+    border-radius: 3px !important;
+  }
+
+  .skeleton-champion span {
+    font-size: 9px !important;
+  }
+
+  .skeleton-champion strong {
+    margin: 0 0 1px !important;
+    font-size: 4px !important;
+  }
+
+  .skeleton-champion div {
+    font-size: 4px !important;
+  }
+
+  .skeleton-third-place {
+    bottom: 1px !important;
+    width: 80px !important;
+    padding-top: 2px !important;
+  }
+
+  .third-place-title {
+    margin-bottom: 1px !important;
+    font-size: 4px !important;
+  }
+
+  .third-place-team {
+    max-width: 80px !important;
+    padding: 3px !important;
+    border-width: 1px !important;
+    border-radius: 3px !important;
+    font-size: 4px !important;
+  }
+
+  .champions-bracket-lines path {
+    stroke-width: 1px !important;
+  }
+}
+
+@media (max-width:390px) {
+  .champions-skeleton-grid,
+  .champions-skeleton-grid.qf-only {
+    height: 270px !important;
+    min-height: 270px !important;
+  }
+
+  .skeleton-final-tie { top: 135px !important; }
+  .skeleton-champion { top: 170px !important; }
+}
+
+/* =========================================================
+   MOBILE KNOCKOUT — MATCH HERO AREA SIZE
+   Uses the same full-width / compact height as the top hero.
+========================================================= */
+@media (max-width:700px) {
+  .champions-skeleton-scroll {
+    width:100% !important;
+    box-sizing:border-box !important;
+    padding:0 !important;
+    overflow:hidden !important;
+  }
+
+  .champions-skeleton-grid,
+  .champions-skeleton-grid.qf-only {
+    width:100% !important;
+    min-width:0 !important;
+    height:142px !important;
+    min-height:142px !important;
+    box-sizing:border-box !important;
+  }
+
+  .skeleton-round-title {
+    height:14px !important;
+    font-size:4px !important;
+  }
+
+  .skeleton-round-title::after {
+    top:13px !important;
+    width:22px !important;
+    height:1px !important;
+  }
+
+  .skeleton-round-body {
+    height:calc(100% - 14px) !important;
+  }
+
+  .visual-bracket-label {
+    margin:0 0 1px !important;
+    padding:0 1px !important;
+    font-size:3px !important;
+    line-height:4px !important;
+  }
+
+  .visual-bracket-team {
+    height:11px !important;
+    min-height:11px !important;
+    max-height:11px !important;
+    margin:0 !important;
+    padding:0 2px !important;
+    border-width:1px !important;
+    border-radius:1px !important;
+    font-size:4px !important;
+    line-height:9px !important;
+    gap:1px !important;
+  }
+
+  .visual-bracket-team strong {
+    min-width:7px !important;
+    padding-left:1px !important;
+    font-size:4px !important;
+    line-height:9px !important;
+  }
+
+  .skeleton-trophy {
+    padding:4px 0 1px !important;
+  }
+
+  .trophy-icon {
+    font-size:14px !important;
+  }
+
+  .trophy-label {
+    margin-top:1px !important;
+    font-size:3px !important;
+  }
+
+  .skeleton-final-tie {
+    top:71px !important;
+    width:calc(100% - 2px) !important;
+  }
+
+  .skeleton-final-tie .visual-bracket-team {
+    height:11px !important;
+    min-height:11px !important;
+    max-height:11px !important;
+    font-size:4px !important;
+  }
+
+  .skeleton-champion {
+    top:89px !important;
+    width:52px !important;
+    padding:2px !important;
+    border-width:1px !important;
+    border-radius:2px !important;
+  }
+
+  .skeleton-champion span {
+    font-size:7px !important;
+  }
+
+  .skeleton-champion strong,
+  .skeleton-champion div {
+    font-size:3px !important;
+  }
+
+  .skeleton-third-place {
+    bottom:1px !important;
+    width:62px !important;
+    padding-top:1px !important;
+  }
+
+  .third-place-title {
+    margin-bottom:1px !important;
+    font-size:3px !important;
+  }
+
+  .third-place-team {
+    max-width:62px !important;
+    padding:2px !important;
+    border-width:1px !important;
+    border-radius:2px !important;
+    font-size:3px !important;
+  }
+
+  .champions-bracket-lines path {
+    stroke-width:.75px !important;
+  }
+}
+
+@media (max-width:390px) {
+  .champions-skeleton-grid,
+  .champions-skeleton-grid.qf-only {
+    height:142px !important;
+    min-height:142px !important;
+  }
+}
+
+
+/* =========================================================
+   TOP KNOCKOUT STAGE — FULL SCREEN WIDTH
+   Matches the full left-to-right width of the hero area.
+========================================================= */
+
+.champions-bracket-top {
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.champions-bracket-top > .section-card {
+  width: 100%;
+  max-width: none !important;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
+}
+
+
+
+/* =========================================================
+   TOP KNOCKOUT STAGE — REMOVE SECTION SIDE GAPS
+========================================================= */
+
+.champions-bracket-top {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.champions-bracket-top > .section-card {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+}
+
+
+
+/* =========================================================
+   KNOCKOUT STAGE — HERO WIDTH AND FULL-WIDTH BACKGROUND
+========================================================= */
+
+.champions-bracket-top {
+  position: relative !important;
+  left: 50% !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+  padding: 45px 0 !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(135deg, #172554, #1d4ed8) !important;
+}
+
+.champions-bracket-top > .section-card {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  color: white !important;
+  box-sizing: border-box !important;
+}
+
+.champions-bracket-top > .section-card h3 {
+  color: white !important;
+}
+
+
+/* =========================================================
+   KNOCKOUT DIAGRAM — DIRECTLY FUSED TO BACKGROUND
+========================================================= */
+
+.champions-bracket-top #championsBracket {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 20px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+.champions-bracket-top #championsBracket h3 {
+  color: white !important;
+  background: transparent !important;
+  margin-top: 0 !important;
+}
+
+
+/* FINAL KNOCKOUT PRESENTATION */
+.champions-bracket-top,
+.champions-bracket-top #championsBracket,
+.champions-skeleton-shell {
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+.champions-skeleton-shell {
+  border-left: 0 !important;
+  border-right: 0 !important;
+  box-shadow: none !important;
+}
+.champions-bracket-top .dls-knockout-title {
+  margin: 0 0 18px !important;
+  padding: 0 20px !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-align: center !important;
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  letter-spacing: 1px !important;
+}
+@media (max-width:700px) {
+  .champions-bracket-top { padding: 24px 0 !important; }
+
+  .champions-bracket-top .dls-knockout-title {
+    margin-bottom: 14px !important;
+    padding: 0 12px !important;
+    font-size: 20px !important;
+    letter-spacing: .7px !important;
+  }
+
+  .champions-skeleton-scroll {
+    padding: 0 !important;
+  }
+
+  /* Give the mobile diagram enough vertical space for
+     the final, champion and 3rd-place sections. */
+  .champions-skeleton-grid,
+  .champions-skeleton-grid.qf-only {
+    height: 300px !important;
+    min-height: 300px !important;
+  }
+
+  .visual-bracket-label {
+    font-size: 6px !important;
+    line-height: 7px !important;
+    padding: 1px 3px !important;
+  }
+
+  .visual-bracket-team,
+  .skeleton-final-tie .visual-bracket-team {
+    height: 20px !important;
+    min-height: 20px !important;
+    max-height: 20px !important;
+    padding: 1px 3px !important;
+    font-size: 7px !important;
+    line-height: 18px !important;
+  }
+
+  .visual-bracket-team strong {
+    min-width: 10px !important;
+    font-size: 7px !important;
+    line-height: 18px !important;
+  }
+
+  .skeleton-round-title {
+    height: 20px !important;
+    font-size: 6px !important;
+  }
+
+  .skeleton-round-title::after {
+    top: 19px !important;
+    width: 28px !important;
+  }
+
+  .skeleton-round-body {
+    height: calc(100% - 20px) !important;
+  }
+
+  .skeleton-final-tie {
+    top: 125px !important;
+  }
+
+  .skeleton-champion {
+    top: 190px !important;
+    width: 120px !important;
+    padding: 6px !important;
+  }
+
+  .skeleton-champion span {
+    font-size: 15px !important;
+  }
+
+  .skeleton-champion strong {
+    font-size: 7px !important;
+  }
+
+  .skeleton-champion div {
+    font-size: 7px !important;
+  }
+
+  /* 3rd place is a real visible result box on mobile. */
+  .skeleton-third-place {
+    left: 50% !important;
+    bottom: 10px !important;
+    width: 180px !important;
+    padding-top: 4px !important;
+  }
+
+  .third-place-title {
+    margin-bottom: 4px !important;
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+  }
+
+  .third-place-team {
+    width: 100% !important;
+    max-width: 180px !important;
+    min-height: 28px !important;
+    padding: 6px 8px !important;
+    border-width: 2px !important;
+    border-radius: 6px !important;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .champions-bracket-lines path {
+    stroke-width: 1px !important;
+  }
+}
+
+@media (max-width:390px) {
+  .champions-skeleton-grid,
+  .champions-skeleton-grid.qf-only {
+    height: 300px !important;
+    min-height: 300px !important;
+  }
+
+  .visual-bracket-team,
+  .skeleton-final-tie .visual-bracket-team {
+    font-size: 6.5px !important;
+  }
+
+  .skeleton-third-place {
+    width: 165px !important;
+  }
+
+  .third-place-team {
+    max-width: 165px !important;
+    font-size: 8px !important;
+  }
+}
+
+
+/* =========================================================
+   KNOCKOUT DIAGRAM — DIRECTLY ON BLUE BACKGROUND
+========================================================= */
+
+.champions-skeleton-shell {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.champions-skeleton-scroll,
+.champions-skeleton-grid {
+  background: transparent !important;
+}
+
+
+/* =========================================================
+   FINAL KNOCKOUT BACKGROUND + TEAM NAME FIX
+   The bracket itself is part of the same blue hero surface.
+========================================================= */
+
+.champions-bracket-top,
+.champions-bracket-top #championsBracket,
+.champions-bracket-top #championsBracketContent,
+.champions-bracket-top .bracket-container,
+.champions-bracket-top .champions-skeleton-shell,
+.champions-bracket-top .champions-skeleton-scroll,
+.champions-bracket-top .champions-skeleton-grid {
+  background: linear-gradient(
+    135deg,
+    #172554,
+    #1d4ed8
+  ) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Keep the individual team-name rectangles, but never let
+   the team text disappear outside its own box. */
+.champions-bracket-top .visual-bracket-team {
+  overflow: hidden !important;
+}
+
+.champions-bracket-top .visual-bracket-team > span {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  text-overflow: clip !important;
+  line-height: 1.1 !important;
+}
+
+.champions-bracket-top .visual-bracket-team > strong {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 22px !important;
+  white-space: nowrap !important;
+}
+
+/* Phone: readable names with enough vertical room for wrapping. */
+@media (max-width:700px) {
+  .champions-bracket-top .visual-bracket-team {
+    height: 22px !important;
+    min-height: 22px !important;
+    max-height: 22px !important;
+    padding: 2px 3px !important;
+    font-size: 7px !important;
+    line-height: 8px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span {
+    line-height: 8px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > strong {
+    min-width: 10px !important;
+    font-size: 7px !important;
+    line-height: 17px !important;
+  }
+
+  .champions-bracket-top .skeleton-final-tie .visual-bracket-team {
+    height: 22px !important;
+    min-height: 22px !important;
+    max-height: 22px !important;
+    font-size: 7px !important;
+  }
+}
+
+@media (max-width:390px) {
+  .champions-bracket-top .visual-bracket-team {
+    height: 21px !important;
+    min-height: 21px !important;
+    max-height: 21px !important;
+    font-size: 6.5px !important;
+    line-height: 7px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span {
+    line-height: 7px !important;
+  }
+}
+
+
+/* =========================================================
+   KNOCKOUT TEAM BOX ALIGNMENT — FINAL
+========================================================= */
+
+.champions-bracket-top .visual-bracket-team {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.champions-bracket-top .visual-bracket-team > span {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  line-height: 1.2 !important;
+}
+
+.champions-bracket-top .visual-bracket-team > strong {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 28px !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  line-height: 1 !important;
+}
+
+@media (max-width:700px) {
+  .champions-bracket-top .visual-bracket-team {
+    padding: 0 3px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span {
+    line-height: 1 !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > strong {
+    flex-basis: 12px !important;
+    width: 12px !important;
+    min-width: 12px !important;
+    font-size: 6.5px !important;
+  }
+}
+
+
+/* =========================================================
+   KNOCKOUT TEAM NAMES — SINGLE AUTHORITATIVE RULESET
+   Keep names inside their boxes without shrinking them to
+   unreadable sizes or creating conflicting overrides.
+========================================================= */
+
+.champions-bracket-top .visual-bracket-team {
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.champions-bracket-top .visual-bracket-team > span {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  text-overflow: clip !important;
+  line-height: 1.1 !important;
+  text-align: left !important;
+}
+
+.champions-bracket-top .visual-bracket-team > strong {
+  flex: 0 0 22px !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+.champions-bracket-top .visual-bracket-team > span.team-name-medium {
+  font-size: 11px !important;
+  letter-spacing: -0.15px !important;
+}
+
+.champions-bracket-top .visual-bracket-team > span.team-name-small {
+  font-size: 9px !important;
+  letter-spacing: -0.2px !important;
+}
+
+.champions-bracket-top .visual-bracket-team > span.team-name-xsmall {
+  font-size: 8px !important;
+  letter-spacing: -0.25px !important;
+}
+
+@media (max-width:700px) {
+  .champions-bracket-top .visual-bracket-team {
+    height: 20px !important;
+    min-height: 20px !important;
+    max-height: 20px !important;
+    width: 100% !important;
+    padding: 1px 3px !important;
+    gap: 1px !important;
+    border-radius: 2px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span {
+    line-height: 7px !important;
+    font-size: 6.8px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > strong {
+    flex-basis: 10px !important;
+    width: 10px !important;
+    min-width: 10px !important;
+    max-width: 10px !important;
+    font-size: 6.5px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span.team-name-medium {
+    font-size: 6.5px !important;
+    letter-spacing: -0.05px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span.team-name-small {
+    font-size: 6.1px !important;
+    letter-spacing: -0.05px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span.team-name-xsmall {
+    font-size: 5.7px !important;
+    letter-spacing: -0.05px !important;
+  }
+}
+
+@media (max-width:390px) {
+  .champions-bracket-top .visual-bracket-team {
+    height: 19px !important;
+    min-height: 19px !important;
+    max-height: 19px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span {
+    line-height: 6.5px !important;
+    font-size: 6.5px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span.team-name-medium {
+    font-size: 6.2px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span.team-name-small {
+    font-size: 5.8px !important;
+  }
+
+  .champions-bracket-top .visual-bracket-team > span.team-name-xsmall {
+    font-size: 5.4px !important;
+  }
+}
+
+
+/* =========================================================
+   KNOCKOUT RESULT COLORS
+========================================================= */
+
+.champions-bracket-top .visual-bracket-team.is-winner {
+  background: #166534 !important;
+  border-color: #22c55e !important;
+  color: #baffd9 !important;
+}
+
+.champions-bracket-top .visual-bracket-team.is-loser {
+  background: #b91c1c !important;
+  border-color: #ef4444 !important;
+  color: #fff !important;
+}
+
+
+/* =========================================================
+   WINNER CELEBRATION
+========================================================= */
+
+.winner-celebration {
+  width: 100%;
+  margin-top: 25px;
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top, #fff7c2 0%, #facc15 32%, #b45309 100%);
+  box-shadow:
+    0 12px 35px rgba(120, 53, 15, 0.25);
+  color: #3b2200;
+  text-align: center;
+  animation: winnerCelebrationPop 0.8s ease both;
+}
+
+.winner-celebration-inner {
+  position: relative;
+  padding: 28px 18px 32px;
+  overflow: hidden;
+}
+
+.winner-label {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.winner-medal {
+  font-size: 76px;
+  line-height: 1;
+  animation:
+    winnerMedalDrop 1s ease both,
+    winnerMedalFloat 2.2s ease-in-out 1s infinite;
+}
+
+.winner-team-name {
+  margin: 14px auto 8px;
+  max-width: 100%;
+  font-size: clamp(28px, 7vw, 58px);
+  line-height: 1.05;
+  font-weight: 1000;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-shadow:
+    0 3px 0 rgba(255, 255, 255, 0.55);
+  animation: winnerNameReveal 1s ease 0.25s both;
+}
+
+.winner-title {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  animation: winnerPulse 1.5s ease-in-out infinite;
+}
+
+.winner-prize {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 18px;
+  padding: 12px 22px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(120, 53, 15, 0.25);
+  box-shadow: 0 7px 20px rgba(120, 53, 15, 0.2);
+  animation: winnerPrizeReveal 0.9s ease 0.7s both;
+}
+
+.winner-prize-label {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.winner-prize strong {
+  font-size: clamp(22px, 6vw, 34px);
+  overflow-wrap: anywhere;
+}
+
+.winner-congratulations {
+  margin-top: 14px;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.winner-confetti {
+  font-size: 20px;
+  letter-spacing: 8px;
+  white-space: nowrap;
+  animation: winnerConfettiMove 2s ease-in-out infinite;
+}
+
+.winner-confetti-bottom {
+  margin-top: 20px;
+  animation-delay: 0.5s;
+}
+
+@keyframes winnerCelebrationPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  70% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes winnerMedalDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-70px) rotate(-18deg) scale(0.6);
+  }
+  70% {
+    transform: translateY(8px) rotate(5deg) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes winnerMedalFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+
+@keyframes winnerNameReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(25px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes winnerPrizeReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes winnerPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes winnerConfettiMove {
+  0%, 100% {
+    transform: translateX(-8px);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+@media (max-width: 700px) {
+
+  .winner-celebration-inner {
+    padding: 22px 12px 26px;
+  }
+
+  .winner-medal {
+    font-size: 62px;
+  }
+
+  .winner-team-name {
+    font-size: clamp(24px, 9vw, 42px);
+  }
+
+  .winner-title {
+    font-size: 18px;
+  }
+
+  .winner-prize {
+    max-width: 100%;
+    padding: 11px 16px;
+  }
+
+  .winner-confetti {
+    font-size: 16px;
+    letter-spacing: 4px;
+  }
+}
+
+
+/* =========================================================
+   CHAMPIONS PRIZE ADMIN CONTROL
+========================================================= */
+
+.champions-prize-settings select {
+  width: 100%;
+  max-width: 260px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin: 6px 0 14px;
+}
+
+.prize-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.prize-toggle-label input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* =========================================================
+   3D CASH PRIZE
+========================================================= */
+
+.winner-prize {
+  position: relative;
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
+.winner-prize strong {
+  display: inline-block;
+  padding: 4px 10px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  transform: rotateX(8deg);
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.8),
+    0 4px 0 rgba(120,53,15,.18),
+    0 7px 12px rgba(120,53,15,.25);
+  animation: prize3DFloat 2.4s ease-in-out infinite;
+}
+
+.winner-prize::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 18px;
+  border: 2px solid rgba(255,255,255,.75);
+  pointer-events: none;
+  animation: prize3DGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes prize3DFloat {
+  0%,100% {
+    transform: rotateX(8deg) rotateY(-2deg) translateY(0);
+  }
+  50% {
+    transform: rotateX(8deg) rotateY(2deg) translateY(-5px);
+  }
+}
+
+@keyframes prize3DGlow {
+  0%,100% {
+    opacity: .55;
+    transform: scale(.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+
+/* =========================================================
+   WINNER FIREWORKS, BALLOONS & CRAWLER
+========================================================= */
+
+.winner-celebration-inner {
+  position: relative;
+}
+
+.winner-fireworks {
+  position: absolute;
+  inset: 8px 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+  font-size: 28px;
+}
+
+.winner-fireworks span {
+  display: inline-block;
+  animation: winnerFireworkBurst 1.6s ease-in-out infinite;
+}
+
+.winner-fireworks span:nth-child(2) {
+  animation-delay: .35s;
+}
+
+.winner-fireworks span:nth-child(3) {
+  animation-delay: .7s;
+}
+
+.winner-fireworks span:nth-child(4) {
+  animation-delay: 1s;
+}
+
+.winner-fireworks span:nth-child(5) {
+  animation-delay: 1.3s;
+}
+
+.winner-balloons {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.winner-balloons span {
+  position: absolute;
+  bottom: -55px;
+  font-size: 38px;
+  animation: winnerBalloonRise 7s linear infinite;
+}
+
+.winner-balloons span:nth-child(1) {
+  left: 4%;
+  animation-delay: 0s;
+}
+
+.winner-balloons span:nth-child(2) {
+  left: 23%;
+  animation-delay: 2s;
+}
+
+.winner-balloons span:nth-child(3) {
+  left: 48%;
+  animation-delay: 4s;
+}
+
+.winner-balloons span:nth-child(4) {
+  left: 73%;
+  animation-delay: 1s;
+}
+
+.winner-balloons span:nth-child(5) {
+  left: 91%;
+  animation-delay: 3s;
+}
+
+.winner-crawler-wrap {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  overflow: hidden;
+  margin: 4px 0 12px;
+  padding: 8px 0;
+  background: rgba(255,255,255,.18);
+  border-top: 2px solid rgba(255,255,255,.5);
+  border-bottom: 2px solid rgba(255,255,255,.5);
+}
+
+.winner-crawler {
+  display: inline-block;
+  min-width: max-content;
+  padding-left: 100%;
+  font-size: clamp(24px, 6vw, 52px);
+  line-height: 1;
+  font-weight: 1000;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+  text-shadow:
+    0 3px 0 rgba(120,53,15,.55),
+    0 7px 16px rgba(120,53,15,.45);
+  animation: winnerCrawlerMove 11s linear infinite;
+}
+
+@keyframes winnerFireworkBurst {
+  0%, 100% {
+    opacity: .45;
+    transform: scale(.65) rotate(-15deg);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.45) rotate(12deg);
+  }
+  65% {
+    opacity: .8;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes winnerBalloonRise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(-8deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-280px) translateX(18px) rotate(8deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-600px) translateX(-15px) rotate(-8deg);
+  }
+}
+
+@keyframes winnerCrawlerMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 700px) {
+  .winner-fireworks {
+    font-size: 21px;
+  }
+
+  .winner-balloons span {
+    font-size: 29px;
+  }
+
+  .winner-crawler {
+    font-size: clamp(22px, 8vw, 38px);
+    animation-duration: 9s;
+  }
+}
+
+
+/* =========================================================
+   CHAMPIONS TROPHY PRESENTATION STAGE
+========================================================= */
+
+.winner-celebration {
+  margin-top: 25px;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(40,88,160,.42), transparent 35%),
+    linear-gradient(180deg, #07152d 0%, #020817 58%, #01040b 100%);
+  color: #fff;
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.45),
+    inset 0 0 80px rgba(40,120,220,.12);
+}
+
+.ucl-stage {
+  position: relative;
+  min-height: 610px;
+  padding: 18px 14px 35px;
+  overflow: hidden;
+  text-align: center;
+  perspective: 1000px;
+}
+
+.ucl-stage::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 0;
+  height: 44%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 0,
+      rgba(255,255,255,.025) 2px,
+      transparent 2px,
+      transparent 42px
+    );
+  transform: perspective(500px) rotateX(58deg);
+  transform-origin: bottom;
+  pointer-events: none;
+}
+
+.stage-stars {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  color: #dbeafe;
+  letter-spacing: 14px;
+  font-size: 18px;
+  opacity: .75;
+  animation: stageStarsTwinkle 2.5s ease-in-out infinite;
+}
+
+.stage-crawler-wrap {
+  position: relative;
+  z-index: 8;
+  width: 100%;
+  overflow: hidden;
+  margin: 12px 0 25px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,.25);
+  border-bottom: 1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.28);
+}
+
+.stage-crawler {
+  display: inline-block;
+  min-width: max-content;
+  padding-left: 100%;
+  white-space: nowrap;
+  font-size: clamp(21px, 5vw, 40px);
+  font-weight: 1000;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 3px 12px rgba(0,0,0,.8);
+  animation: stageCrawler 13s linear infinite;
+}
+
+.stage-title {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 12px;
+  letter-spacing: 5px;
+}
+
+.stage-title span {
+  font-size: 13px;
+  font-weight: 800;
+  opacity: .7;
+}
+
+.stage-title strong {
+  font-size: clamp(21px, 5vw, 36px);
+  font-weight: 1000;
+  background: linear-gradient(180deg,#fff,#dbeafe 55%,#8ab4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stage-spotlight {
+  position: absolute;
+  top: 95px;
+  width: 30%;
+  height: 370px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.22),
+    rgba(80,150,255,.06),
+    transparent
+  );
+  filter: blur(4px);
+  transform-origin: top;
+  pointer-events: none;
+}
+
+.spotlight-left {
+  left: 14%;
+  transform: rotate(13deg);
+}
+
+.spotlight-right {
+  right: 14%;
+  transform: rotate(-13deg);
+}
+
+.stage-trophy-area {
+  position: relative;
+  z-index: 5;
+  height: 190px;
+  margin-top: 8px;
+}
+
+.stage-trophy {
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+  font-size: 112px;
+  line-height: 1;
+  filter:
+    drop-shadow(0 8px 5px rgba(0,0,0,.65))
+    drop-shadow(0 0 22px rgba(255,210,70,.65));
+  animation: trophyPresentation 2.8s ease-in-out infinite;
+}
+
+.stage-medal {
+  position: absolute;
+  left: calc(50% + 57px);
+  top: 90px;
+  font-size: 42px;
+  z-index: 2;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,.65));
+  animation: medalSwing 2.2s ease-in-out infinite;
+}
+
+.stage-firework {
+  position: absolute;
+  color: #facc15;
+  font-size: 42px;
+  opacity: .8;
+  animation: stageBurst 1.8s ease-in-out infinite;
+}
+
+.firework-one { left: 22%; top: 35px; }
+.firework-two { right: 23%; top: 58px; animation-delay: .6s; }
+.firework-three { left: 31%; top: 105px; animation-delay: 1s; }
+
+.stage-winner-name {
+  position: relative;
+  z-index: 6;
+  max-width: 92%;
+  margin: -2px auto 18px;
+  font-size: clamp(29px, 8vw, 60px);
+  line-height: 1.03;
+  font-weight: 1000;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  text-shadow:
+    0 3px 0 #6b4b00,
+    0 7px 18px rgba(0,0,0,.8);
+  animation: winnerNameStage 1s ease both;
+}
+
+.stage-podium {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 105px;
+}
+
+.podium-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px 8px 2px 2px;
+  font-weight: 900;
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.2),
+    0 12px 20px rgba(0,0,0,.35);
+}
+
+.podium-block span {
+  font-size: 9px;
+  letter-spacing: 1px;
+  opacity: .75;
+}
+
+.podium-block b {
+  font-size: 34px;
+}
+
+.podium-left,
+.podium-right {
+  width: 27%;
+  height: 58px;
+  background: linear-gradient(180deg,#7c8799,#303949);
+}
+
+.podium-center {
+  width: 34%;
+  height: 88px;
+  background: linear-gradient(180deg,#d9a62e,#76500a);
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.45),
+    0 0 25px rgba(245,190,55,.2),
+    0 15px 25px rgba(0,0,0,.4);
+}
+
+.stage-prize {
+  position: relative;
+  z-index: 7;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 22px;
+  padding: 10px 25px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 12px;
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,.18),
+    rgba(255,255,255,.05)
+  );
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.25);
+  backdrop-filter: blur(8px);
+}
+
+.stage-prize span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 900;
+  opacity: .7;
+}
+
+.stage-prize strong {
+  font-size: clamp(24px, 6vw, 38px);
+  font-weight: 1000;
+  color: #ffd85a;
+  text-shadow: 0 3px 10px rgba(0,0,0,.65);
+}
+
+.stage-congratulations {
+  position: relative;
+  z-index: 6;
+  margin-top: 16px;
+  font-size: 15px;
+  font-weight: 800;
+  opacity: .85;
+}
+
+.stage-confetti {
+  position: relative;
+  z-index: 6;
+  margin-top: 18px;
+  font-size: 17px;
+  letter-spacing: 7px;
+  color: #f8d56a;
+  animation: stageStarsTwinkle 1.8s ease-in-out infinite;
+}
+
+@keyframes trophyPresentation {
+  0%,100% { transform: translateX(-50%) translateY(0) rotate(-2deg) scale(1); }
+  50% { transform: translateX(-50%) translateY(-12px) rotate(2deg) scale(1.06); }
+}
+
+@keyframes medalSwing {
+  0%,100% { transform: rotate(-8deg); }
+  50% { transform: rotate(10deg) translateY(-5px); }
+}
+
+@keyframes stageBurst {
+  0%,100% { opacity: .25; transform: scale(.6); }
+  50% { opacity: 1; transform: scale(1.35); }
+}
+
+@keyframes winnerNameStage {
+  from { opacity: 0; transform: translateY(25px) scale(.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes stageStarsTwinkle {
+  0%,100% { opacity: .4; }
+  50% { opacity: 1; }
+}
+
+@keyframes stageCrawler {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@media (max-width: 700px) {
+  .ucl-stage {
+    min-height: 570px;
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .stage-trophy {
+    font-size: 88px;
+  }
+
+  .stage-medal {
+    left: calc(50% + 44px);
+    top: 78px;
+    font-size: 34px;
+  }
+
+  .stage-firework {
+    font-size: 30px;
+  }
+
+  .stage-podium {
+    height: 95px;
+  }
+
+  .podium-left,
+  .podium-right {
+    height: 50px;
+  }
+
+  .podium-center {
+    height: 78px;
+  }
+}
+
+
+/* Podium team names */
+.stage-podium {
+  align-items: flex-end;
+}
+
+.podium-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 27%;
+  min-width: 0;
+}
+
+.podium-column-center {
+  width: 34%;
+}
+
+.podium-team-name {
+  width: 100%;
+  min-height: 38px;
+  margin-bottom: 7px;
+  padding: 0 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(11px, 2.5vw, 16px);
+  line-height: 1.05;
+  font-weight: 1000;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.85);
+}
+
+.podium-champion-name {
+  color: #ffd85a;
+  font-size: clamp(12px, 2.8vw, 18px);
+}
+
+.podium-column .podium-left,
+.podium-column .podium-right,
+.podium-column .podium-center {
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .podium-team-name {
+    min-height: 42px;
+    font-size: 10px;
+    padding: 0 2px;
+  }
+
+  .podium-champion-name {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   FINAL PODIUM NAME LAYOUT
+========================================================= */
+
+.stage-podium {
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.podium-block {
+  width: 27%;
+  min-width: 0;
+  height: 82px;
+  padding: 8px 7px;
+  box-sizing: border-box;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.podium-block span {
+  flex-shrink: 0;
+}
+
+.podium-block .podium-team-name {
+  display: block;
+  width: 100%;
+  margin: 5px 0 0;
+  padding: 0;
+  min-height: 0;
+  font-size: clamp(10px, 2.5vw, 15px);
+  line-height: 1.08;
+  font-weight: 1000;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-shadow: 0 2px 7px rgba(0,0,0,.75);
+}
+
+/* 2ND PLACE — SILVER */
+.podium-left {
+  height: 72px;
+  background: linear-gradient(
+    180deg,
+    #f4f6f8 0%,
+    #c9d0d8 45%,
+    #747d88 100%
+  );
+  border: 2px solid #e5e7eb;
+  color: #1f2937;
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.75),
+    0 0 18px rgba(210,220,230,.35),
+    0 15px 30px rgba(0,0,0,.45);
+  animation: silverPodiumGlow 2.2s ease-in-out infinite;
+}
+
+/* 3RD PLACE — BRONZE */
+.podium-right {
+  height: 72px;
+  background: linear-gradient(
+    180deg,
+    #e0a06a 0%,
+    #b87333 45%,
+    #6f3518 100%
+  );
+  border: 2px solid #cd7f32;
+  color: #fff4e6;
+  box-shadow:
+    inset 0 3px 0 rgba(255,235,210,.5),
+    0 0 18px rgba(205,127,50,.35),
+    0 15px 30px rgba(0,0,0,.45);
+  animation: bronzePodiumGlow 2.2s ease-in-out infinite;
+}
+
+/* 1ST PLACE — GOLD */
+.podium-center {
+  width: 36%;
+  height: 115px;
+  padding: 10px 9px;
+  background: linear-gradient(
+    180deg,
+    #ffe98a 0%,
+    #d9a62e 45%,
+    #76500a 100%
+  );
+  border: 2px solid #ffd700;
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.55),
+    0 0 30px rgba(255,215,0,.45),
+    0 15px 30px rgba(0,0,0,.45);
+  animation: goldPodiumGlow 2.2s ease-in-out infinite;
+}
+
+@keyframes goldPodiumGlow {
+  0%,100% {
+    filter: brightness(1);
+    box-shadow:
+      inset 0 3px 0 rgba(255,255,255,.55),
+      0 0 25px rgba(255,215,0,.35),
+      0 15px 30px rgba(0,0,0,.45);
+  }
+  50% {
+    filter: brightness(1.12);
+    box-shadow:
+      inset 0 3px 0 rgba(255,255,255,.7),
+      0 0 42px rgba(255,215,0,.75),
+      0 15px 30px rgba(0,0,0,.5);
+  }
+}
+
+@keyframes silverPodiumGlow {
+  0%,100% {
+    filter: brightness(1);
+    box-shadow:
+      inset 0 3px 0 rgba(255,255,255,.75),
+      0 0 16px rgba(210,220,230,.25),
+      0 15px 30px rgba(0,0,0,.45);
+  }
+  50% {
+    filter: brightness(1.12);
+    box-shadow:
+      inset 0 3px 0 rgba(255,255,255,.95),
+      0 0 30px rgba(220,230,240,.65),
+      0 15px 30px rgba(0,0,0,.5);
+  }
+}
+
+@keyframes bronzePodiumGlow {
+  0%,100% {
+    filter: brightness(1);
+    box-shadow:
+      inset 0 3px 0 rgba(255,235,210,.5),
+      0 0 16px rgba(205,127,50,.25),
+      0 15px 30px rgba(0,0,0,.45);
+  }
+  50% {
+    filter: brightness(1.12);
+    box-shadow:
+      inset 0 3px 0 rgba(255,235,210,.75),
+      0 0 30px rgba(205,127,50,.65),
+      0 15px 30px rgba(0,0,0,.5);
+  }
+}
+
+.podium-center span {
+  color: #fff3b0;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.podium-center .podium-team-name {
+  font-size: clamp(16px, 4vw, 27px);
+  line-height: 1.02;
+  color: #fff;
+  text-shadow:
+    0 2px 0 #7b5500,
+    0 0 10px rgba(255,220,100,.75),
+    0 4px 14px rgba(0,0,0,.8);
+  animation: championNameGlow 1.8s ease-in-out infinite;
+}
+
+.podium-center b {
+  margin-top: 4px;
+  color: #ffe27a;
+}
+
+@keyframes championNameGlow {
+  0%,100% {
+    transform: scale(1);
+    text-shadow:
+      0 2px 0 #7b5500,
+      0 0 8px rgba(255,220,100,.55),
+      0 4px 14px rgba(0,0,0,.8);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow:
+      0 2px 0 #7b5500,
+      0 0 18px rgba(255,225,100,1),
+      0 5px 18px rgba(0,0,0,.9);
+  }
+}
+
+@media (max-width: 700px) {
+  .stage-podium {
+    gap: 4px;
+  }
+
+  .podium-block {
+    padding: 7px 4px;
+  }
+
+  .podium-left,
+  .podium-right {
+    height: 68px;
+  }
+
+  .podium-center {
+    height: 108px;
+  }
+
+  .podium-block .podium-team-name {
+    font-size: 9px;
+  }
+
+  .podium-center .podium-team-name {
+    font-size: clamp(14px, 4.2vw, 22px);
+  }
+}
+
+
+/* =========================================================
+   CHAMPION NAME — GOLD 3D PRESENTATION
+========================================================= */
+
+.stage-winner-name {
+  position: relative;
+  z-index: 7;
+  max-width: 94%;
+  margin: 8px auto 20px;
+  text-align: center;
+  font-size: clamp(32px, 9vw, 68px);
+  line-height: 1.02;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  color: #ffd700;
+  -webkit-text-stroke: 1px #8a5a00;
+  text-shadow:
+    1px 1px 0 #8a5a00,
+    2px 2px 0 #744900,
+    3px 3px 0 #5c3800,
+    4px 4px 0 #432900,
+    0 7px 16px rgba(0,0,0,.85),
+    0 0 22px rgba(255,215,0,.7);
+  transform: perspective(600px) rotateX(4deg);
+  animation: championGold3D 2s ease-in-out infinite;
+}
+
+@keyframes championGold3D {
+  0%,100% {
+    transform: perspective(600px) rotateX(4deg) translateY(0) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: perspective(600px) rotateX(4deg) translateY(-4px) scale(1.035);
+    filter: brightness(1.12);
+  }
+}
+
+@media (max-width: 700px) {
+  .stage-winner-name {
+    max-width: 96%;
+    margin-top: 5px;
+    margin-bottom: 17px;
+    font-size: clamp(27px, 9vw, 48px);
+    -webkit-text-stroke: .7px #8a5a00;
+    text-shadow:
+      1px 1px 0 #8a5a00,
+      2px 2px 0 #744900,
+      3px 3px 0 #5c3800,
+      0 6px 14px rgba(0,0,0,.85),
+      0 0 18px rgba(255,215,0,.65);
+  }
+}
+
+
+/* =========================================================
+   FINAL TROPHY + CHAMPION CROWN
+========================================================= */
+
+.stage-trophy {
+  font-size: 145px !important;
+  animation: none !important;
+  transform: translateX(-50%) !important;
+}
+
+.podium-crown {
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 3px;
+  filter:
+    drop-shadow(0 2px 2px rgba(0,0,0,.7))
+    drop-shadow(0 0 9px rgba(255,215,0,.55));
+}
+
+.podium-center .podium-champion-name {
+  display: block;
+  width: 100%;
+  margin: 4px 0 0;
+  font-size: clamp(16px, 4vw, 28px);
+  line-height: 1.02;
+  color: #fff;
+  text-align: center;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-shadow:
+    0 2px 0 #7b5500,
+    0 0 12px rgba(255,220,100,.8),
+    0 4px 14px rgba(0,0,0,.8);
+  animation: none !important;
+  transform: none !important;
+}
+
+@media (max-width: 700px) {
+  .stage-trophy {
+    font-size: 112px !important;
+  }
+
+  .podium-crown {
+    font-size: 24px;
+  }
+
+  .podium-center .podium-champion-name {
+    font-size: clamp(14px, 4.2vw, 22px);
+  }
+}
+
+
+/* =========================================================
+   FINAL WINNERS — GOLD CARD + GOLD TEAM NAME
+========================================================= */
+
+.champions-bracket-top .skeleton-final-tie .visual-bracket-team.is-winner {
+  background: linear-gradient(135deg, #8a6500, #c99a16 55%, #6f4f00) !important;
+  border: 2px solid #ffd700 !important;
+  color: #ffd700 !important;
+  font-weight: 1000 !important;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.85),
+    0 0 8px rgba(255,215,0,.65) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,215,0,.45),
+    0 0 18px rgba(255,215,0,.55) !important;
+}
+
+.champions-bracket-top .skeleton-final-tie .visual-bracket-team.is-winner strong {
+  color: white !important;
+}
+
+
+/* =========================================================
+   FINAL SECOND + THIRD PLACE COLORS
+========================================================= */
+
+.champions-bracket-top .skeleton-final-tie .visual-bracket-team.is-loser {
+  background: linear-gradient(135deg, #5f6670, #aeb6c1 55%, #4b535e) !important;
+  border: 2px solid #d9e0e7 !important;
+  color: #ffffff !important;
+  font-weight: 1000 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.8) !important;
+  box-shadow:
+    0 0 0 1px rgba(220,228,236,.4),
+    0 0 14px rgba(190,200,210,.35) !important;
+}
+
+.champions-bracket-top .skeleton-final-tie .visual-bracket-team.is-loser strong {
+  color: #ffffff !important;
+}
+
+.champions-bracket-top .skeleton-third-place .third-place-team {
+  background: linear-gradient(135deg, #6f3518, #b87333 55%, #5a2b13) !important;
+  border: 2px solid #cd7f32 !important;
+  color: #fff4e6 !important;
+  font-weight: 1000 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.8) !important;
+  box-shadow:
+    0 0 0 1px rgba(205,127,50,.4),
+    0 0 14px rgba(180,100,35,.35) !important;
+}
+
+.champions-bracket-top .skeleton-third-place .third-place-title {
+  color: #e7b77a !important;
+}
+
+
+/* =========================================================
+   CHAMPIONS LEAGUE QUALIFYING TEAMS
+========================================================= */
+
+.champions-bracket-top table tr.qualification-team,
+table tr.qualification-team {
+  background: #dcfce7 !important;
+}
+
+.champions-bracket-top table tr.qualification-team td,
+table tr.qualification-team td {
+  background: #dcfce7 !important;
+  color: #14532d !important;
+}
+
+.champions-bracket-top table tr.qualification-team strong,
+table tr.qualification-team strong {
+  color: #166534 !important;
+}
