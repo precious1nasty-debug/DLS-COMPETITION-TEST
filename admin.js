@@ -2093,31 +2093,72 @@ if (championsPrizeEnabled) {
 // READ SEASON SETTINGS
 // =========================================================
 
-function calculateLeagueSeasonEndDate(startDate, teamCount, legs) {
+function calculateSeasonEndDate(startDate, teamCount, format, leagueLegs, championsMatchesPerTeam, knockoutLegs) {
   const count = Number(teamCount);
-  if (!startDate || count < 2) return "";
-  const roundsPerLeg = count % 2 === 0 ? count - 1 : count;
-  const totalDays = roundsPerLeg * (Number(legs) === 2 ? 2 : 1);
+  if (!startDate) return "";
+
+  let totalDays = 0;
+
+  if (format === "champions") {
+    if (count < 9 || count > 40) return "";
+
+    const matches = Number(championsMatchesPerTeam);
+    if (!Number.isInteger(matches) || matches < 1) return "";
+
+    // Odd-sized Champions League schedules need one additional
+    // matchday so the rotating byes can be scheduled.
+    const leaguePhaseDays = count % 2 === 0 ? matches : matches + 1;
+    const qualifiers = count >= 17 ? 16 : 8;
+    const knockoutRounds = qualifiers === 16 ? 4 : 3;
+    const legs = Number(knockoutLegs) === 2 ? 2 : 1;
+
+    totalDays = leaguePhaseDays + (knockoutRounds * legs);
+  } else {
+    if (count < 2) return "";
+    const roundsPerLeg = count % 2 === 0 ? count - 1 : count;
+    totalDays = roundsPerLeg * (Number(leagueLegs) === 2 ? 2 : 1);
+  }
+
   const parts = String(startDate).split("-").map(Number);
   if (parts.length !== 3 || parts.some(value => !Number.isFinite(value))) return "";
   const date = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+  if (Number.isNaN(date.getTime()) ||
+      date.getUTCFullYear() !== parts[0] ||
+      date.getUTCMonth() !== parts[1] - 1 ||
+      date.getUTCDate() !== parts[2]) return "";
+
   date.setUTCDate(date.getUTCDate() + totalDays - 1);
   return date.toISOString().slice(0, 10);
 }
 
 function updateCalculatedLeagueEndDate() {
-  if (season.format !== "league" || season.started || season.formatLocked) return;
-  const endDate = calculateLeagueSeasonEndDate(
+  if (season.started || season.formatLocked) return;
+
+  const format = competitionFormat?.value || season.format || "league";
+  const endDate = calculateSeasonEndDate(
     seasonStart?.value || season.startDate || "",
     teams.length,
-    legFormat?.value || season.legs || 1
+    format,
+    legFormat?.value || season.legs || 1,
+    matchesPerTeam?.value || season.matchesPerTeam || 1,
+    knockoutLegFormat?.value || season.knockoutLegs || 1
   );
+
   season.endDate = endDate;
   if (seasonEnd) seasonEnd.value = endDate;
 }
 
-if (seasonStart) seasonStart.addEventListener("change", updateCalculatedLeagueEndDate);
+if (seasonStart) {
+  seasonStart.addEventListener("change", updateCalculatedLeagueEndDate);
+  seasonStart.addEventListener("input", updateCalculatedLeagueEndDate);
+}
 if (legFormat) legFormat.addEventListener("change", updateCalculatedLeagueEndDate);
+if (matchesPerTeam) {
+  matchesPerTeam.addEventListener("change", updateCalculatedLeagueEndDate);
+  matchesPerTeam.addEventListener("input", updateCalculatedLeagueEndDate);
+}
+if (knockoutLegFormat) knockoutLegFormat.addEventListener("change", updateCalculatedLeagueEndDate);
+if (competitionFormat) competitionFormat.addEventListener("change", updateCalculatedLeagueEndDate);
 
 function readSeasonSettingsFromForm() {
 
