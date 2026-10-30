@@ -1581,6 +1581,8 @@ function updateChampionsSettingsFromTeams() {
   updateMatchesPerTeamSuggestion();
 
   updateChampionsQualificationInfo();
+
+  updateCalculatedLeagueEndDate();
 }
 
 
@@ -2091,6 +2093,32 @@ if (championsPrizeEnabled) {
 // READ SEASON SETTINGS
 // =========================================================
 
+function calculateLeagueSeasonEndDate(startDate, teamCount, legs) {
+  const count = Number(teamCount);
+  if (!startDate || count < 2) return "";
+  const roundsPerLeg = count % 2 === 0 ? count - 1 : count;
+  const totalDays = roundsPerLeg * (Number(legs) === 2 ? 2 : 1);
+  const parts = String(startDate).split("-").map(Number);
+  if (parts.length !== 3 || parts.some(value => !Number.isFinite(value))) return "";
+  const date = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+  date.setUTCDate(date.getUTCDate() + totalDays - 1);
+  return date.toISOString().slice(0, 10);
+}
+
+function updateCalculatedLeagueEndDate() {
+  if (season.format !== "league" || season.started || season.formatLocked) return;
+  const endDate = calculateLeagueSeasonEndDate(
+    seasonStart?.value || season.startDate || "",
+    teams.length,
+    legFormat?.value || season.legs || 1
+  );
+  season.endDate = endDate;
+  if (seasonEnd) seasonEnd.value = endDate;
+}
+
+if (seasonStart) seasonStart.addEventListener("change", updateCalculatedLeagueEndDate);
+if (legFormat) legFormat.addEventListener("change", updateCalculatedLeagueEndDate);
+
 function readSeasonSettingsFromForm() {
 
   if (
@@ -2112,9 +2140,11 @@ function readSeasonSettingsFromForm() {
     "";
 
 
+  updateCalculatedLeagueEndDate();
   season.endDate =
-    seasonEnd?.value ||
-    "";
+    season.format === "league"
+      ? (seasonEnd?.value || "")
+      : (seasonEnd?.value || "");
 
 
   if (
@@ -2177,6 +2207,8 @@ function showFormatMessage(message) {
 // =========================================================
 
 loadSeasonSettingsIntoForm();
+
+updateCalculatedLeagueEndDate();
 
 updateSeasonControlState();
 
@@ -7000,6 +7032,12 @@ function getCurrentKnockoutRound() {
   }
 
 
+  if (knockout.directFinalist) {
+    const directNotice = document.createElement("p");
+    directNotice.textContent = "Direct finalist: " + knockout.directFinalist + " (paired one-leg quarter-final voided).";
+    adminKnockoutList.appendChild(directNotice);
+  }
+
   if (
     knockout.semiFinals &&
     knockout.semiFinals.length > 0
@@ -7193,6 +7231,12 @@ function renderKnockoutTie(
     }
   );
 
+
+  if (tie.oneLegQuarterFinalVoid === true) {
+    const notice = document.createElement("p");
+    notice.textContent = "VOIDED — both teams eliminated. The paired quarter-final winner advances directly to the final.";
+    wrapper.appendChild(notice);
+  }
 
   if (tie.winner) {
 
@@ -7986,12 +8030,33 @@ if (adminKnockoutList) {
         }
         const match = findKnockoutMatch(tie, matchId);
         if (!match || match.voided === true) return;
-        if (!window.confirm("Void this knockout match? It contributes no goals to the aggregate. If the tie is level afterward, manually select who advances.")) return;
+        const isQuarterFinal = (knockout.quarterFinals || []).some(item => item.id === tieId);
+        const specialVoid = isQuarterFinal && Number(season.knockoutLegs || 1) === 1 && (tie.matches || []).length === 1;
+        if (specialVoid) {
+          const alreadyVoided = (knockout.quarterFinals || []).some(item => item.id !== tieId && item.oneLegQuarterFinalVoid === true);
+          if (alreadyVoided) {
+            alert("Only one quarter-final may use this direct-final advancement rule.");
+            return;
+          }
+          const tieIndex = knockout.quarterFinals.findIndex(item => item.id === tieId);
+          const pairedTie = knockout.quarterFinals[tieIndex % 2 === 0 ? tieIndex + 1 : tieIndex - 1];
+          if (!pairedTie || !pairedTie.completed || !pairedTie.winner) {
+            alert("The paired quarter-final must already have a confirmed winner.");
+            return;
+          }
+        }
+        if (!window.confirm(specialVoid
+          ? "Void this one-leg quarter-final? Both teams here are eliminated; the winner of the paired quarter-final advances directly to the final."
+          : "Void this knockout match? It contributes no goals to the aggregate. If the tie is level afterward, manually select who advances.")) return;
         match.voided = true; match.homeScore = null; match.awayScore = null;
         match.resultEntered = false; match.updatedAt = Date.now();
         tie.winner = ""; tie.loser = ""; tie.completed = false;
+        if (specialVoid) {
+          tie.oneLegQuarterFinalVoid = true;
+          tie.voided = true;
+        }
 
-        const recalculated = determineKnockoutWinner(tie);
+        const recalculated = specialVoid ? { status: "voided-quarter-final" } : determineKnockoutWinner(tie);
         if (recalculated.status === "winner") {
           tie.winner = recalculated.winner;
           tie.loser = recalculated.loser;
@@ -7999,8 +8064,11 @@ if (adminKnockoutList) {
         }
 
         if (!(await saveCompetition())) return;
+        if (specialVoid) await checkKnockoutProgression();
         renderKnockout();
-        if (recalculated.status === "winner") {
+        if (recalculated.status === "voided-quarter-final") {
+          alert("Quarter-final voided. Both teams eliminated; paired quarter-final winner advances directly to the final.");
+        } else if (recalculated.status === "winner") {
           alert("Knockout match marked VOIDED. The remaining valid result still decides the tie: " + recalculated.winner + " advances.");
         } else if (recalculated.status === "draw") {
           alert("Knockout match marked VOIDED. The tie is level; manually select who advances.");
@@ -8439,52 +8507,27 @@ async function createQuarterFinals() {
 // =========================================================
 
 async function createSemiFinals() {
-
-  if (
-    !knockout.quarterFinals ||
-    knockout.quarterFinals.length === 0
-  ) {
-    return false;
-  }
-
-
-  if (
-    !areTiesComplete(
-      knockout.quarterFinals
-    )
-  ) {
-    return false;
-  }
-
-
-  if (
-    knockout.semiFinals &&
-    knockout.semiFinals.length > 0
-  ) {
+  const ties = knockout.quarterFinals || [];
+  if (ties.length !== 4 || (knockout.semiFinals || []).length > 0) return false;
+  const voidIndexes = ties.map((tie, index) => tie.oneLegQuarterFinalVoid === true ? index : -1).filter(index => index >= 0);
+  if (voidIndexes.length === 0) {
+    if (!areTiesComplete(ties)) return false;
+    const winners = getRoundWinners(ties);
+    if (winners.length !== 4) return false;
+    knockout.directFinalist = "";
+    knockout.semiFinals = createNextKnockoutRound("SF", winners);
     return true;
   }
-
-
-  const winners =
-    getRoundWinners(
-      knockout.quarterFinals
-    );
-
-
-  if (
-    winners.length !== 4
-  ) {
-    return false;
-  }
-
-
-  knockout.semiFinals =
-    createNextKnockoutRound(
-      "SF",
-      winners
-    );
-
-
+  if (Number(season.knockoutLegs || 1) !== 1 || voidIndexes.length !== 1) return false;
+  const voidIndex = voidIndexes[0];
+  const pairedIndex = voidIndex % 2 === 0 ? voidIndex + 1 : voidIndex - 1;
+  const pairedTie = ties[pairedIndex];
+  if (!pairedTie || !pairedTie.completed || !pairedTie.winner) return false;
+  const otherIndexes = voidIndex < 2 ? [2, 3] : [0, 1];
+  const otherWinners = otherIndexes.map(index => ties[index].winner);
+  if (otherWinners.some(winner => !winner)) return false;
+  knockout.directFinalist = pairedTie.winner;
+  knockout.semiFinals = createNextKnockoutRound("SF", otherWinners);
   return true;
 }
 
@@ -8494,94 +8537,22 @@ async function createSemiFinals() {
 // =========================================================
 
 async function createFinalAndThirdPlace() {
-
-  if (
-    !knockout.semiFinals ||
-    knockout.semiFinals.length !== 2
-  ) {
-    return false;
+  const directFinalist = String(knockout.directFinalist || "");
+  const expectedSemis = directFinalist ? 1 : 2;
+  if (!Array.isArray(knockout.semiFinals) || knockout.semiFinals.length !== expectedSemis) return false;
+  if (!areTiesComplete(knockout.semiFinals)) return false;
+  if (knockout.final && knockout.final.length > 0) return true;
+  const winners = getRoundWinners(knockout.semiFinals);
+  if (winners.length !== expectedSemis) return false;
+  const finalists = directFinalist ? [directFinalist, winners[0]] : winners;
+  knockout.final = [createKnockoutTie("FINAL", 1, finalists[0], finalists[1], 1)];
+  if (directFinalist) {
+    knockout.thirdPlace = null;
+  } else {
+    const losers = getRoundLosers(knockout.semiFinals);
+    if (losers.length !== 2) return false;
+    knockout.thirdPlace = createKnockoutTie("THIRD", 1, losers[0], losers[1], 1);
   }
-
-
-  if (
-    !areTiesComplete(
-      knockout.semiFinals
-    )
-  ) {
-    return false;
-  }
-
-
-  if (
-    knockout.final &&
-    knockout.final.length > 0
-  ) {
-
-    return true;
-  }
-
-
-  const winners =
-    getRoundWinners(
-      knockout.semiFinals
-    );
-
-
-  const losers =
-    getRoundLosers(
-      knockout.semiFinals
-    );
-
-
-  if (
-    winners.length !== 2 ||
-    losers.length !== 2
-  ) {
-    return false;
-  }
-
-
-  /*
-   * Final
-   */
-
-  /*
-   * The Final is always a single match.
-   * The 1/2-leg knockout setting does not apply here.
-   */
-  knockout.final = [
-    createKnockoutTie(
-      "FINAL",
-      1,
-      winners[0],
-      winners[1],
-      1
-    )
-  ];
-
-
-  /*
-   * Third-place match
-   */
-
-  /*
-   * The 3rd-place match is always a single match.
-   * The 1/2-leg knockout setting does not apply here.
-   */
-  const thirdPlaceTie =
-    createKnockoutTie(
-      "THIRD",
-      1,
-      losers[0],
-      losers[1],
-      1
-    );
-
-
-  knockout.thirdPlace =
-    thirdPlaceTie;
-
-
   return true;
 }
 
@@ -8657,7 +8628,7 @@ async function advanceKnockoutStage() {
 
   if (
     knockout.semiFinals &&
-    knockout.semiFinals.length === 2 &&
+    knockout.semiFinals.length === (knockout.directFinalist ? 1 : 2) &&
     (!knockout.final || knockout.final.length === 0)
   ) {
 
@@ -9529,13 +9500,9 @@ function hasThirdPlaceMatch() {
 // =========================================================
 
 function hasSemiFinals() {
-
-  return (
-    Array.isArray(
-      knockout.semiFinals
-    ) &&
-    knockout.semiFinals.length === 2
-  );
+  const expected = knockout.directFinalist ? 1 : 2;
+  return Array.isArray(knockout.semiFinals) &&
+    knockout.semiFinals.length === expected;
 }
 
 
@@ -9605,12 +9572,8 @@ async function runSafeKnockoutProgression() {
     )
   ) {
 
-    if (
-      areTiesComplete(
-        knockout.quarterFinals
-      )
-    ) {
-
+    const qfVoids = (knockout.quarterFinals || []).filter(tie => tie.oneLegQuarterFinalVoid === true);
+    if (qfVoids.length ? qfVoids.length === 1 : areTiesComplete(knockout.quarterFinals)) {
       await createSemiFinals();
     }
   }
